@@ -1,0 +1,50 @@
+<title>Todo App </title>
+<div>
+	<div class="container"> <div class="row"> 
+		<div class="span4">
+	      <h1>Todo App</h1>      
+			<hr>
+			<%= form_for @new_todo, :url => { :action => "create" }  do |f|  %>
+    			<%= f.text_field :todo_item %>
+    			<%= f.submit "Add todo", class: "btn btn-primary" %>
+			<%end%>
+
+			<div class="well">
+				<% if @todo_items.size == 0 %>
+				   <h3>No tasks yet!</h3>
+				<% else %>
+				   <%= form_tag("/todos/complete/", :id => "todo-list-form", :method => "post") do %>
+						<ul style="list-style-type:none;">
+							<% @todo_items.each do |t| %> 
+							    <% if t.completed == true %>
+								    <li style="color:grey;"> <%= check_box_tag  "todos_checkbox[]",t.id , :checked => true %>  
+								    	<strike><%= t.todo_item %></strike> 
+								    </li>
+								<% else %>
+								     <li> <%= check_box_tag  "todos_checkbox[]",t.id %> <%= t.todo_item %>  </li>
+								<% end %>
+							<%end%>
+						</ul>
+						<%= submit_tag("Complete Todos", :class=>"btn btn-success") %>
+					<%end %> 
+					<%= button_to "Delete last todo", delete_path, :id => "delete-last", :class => "btn btn-danger", :method => :get %>
+				<% end %>
+
+			</div> <!-- well --> 
+			
+			<% if flash[:error] %>
+				<div class="alert alert-danger">
+     				<%= flash[:error] %>
+   				</div>
+   			<% end %>
+
+   			<% if flash[:success] %>
+   				<div class="alert alert-success">
+     				<%= flash[:success] %>
+   				</div>
+   			<% end %>
+
+		</div> <!-- span4 --> 
+
+	</div> <!-- row -->
+</div> <!-- container -->

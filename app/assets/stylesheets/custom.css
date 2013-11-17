@@ -1,0 +1,30 @@
+.span4 {
+	width: 30%;
+}
+
+h1, h3 {
+	text-align: center;
+}
+
+form {
+	text-align: center;
+}
+
+#new_todo {
+	padding: 10px;
+    text-align: center;
+}
+
+#todo-list-form {
+	text-align: center;
+}
+
+#todo-list-form > ul {
+	font-size: 1.3em;
+    list-style-type: none;
+    text-align: left;
+}
+
+#delete-last {
+	margin-top: 10px;
+}
